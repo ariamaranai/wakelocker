@@ -6,15 +6,15 @@
         ? (
           chrome.offscreen.createDocument({
             justification: "",
-          reasons: ["BLOBS"],
-          url: "offscreen.htm"
+            reasons: ["BLOBS"],
+            url: "offscreen.htm"
         }),
         "on.png"
-      )
-      : (
-        chrome.offscreen.closeDocument(),
-        "off.png"
-      )
+        )
+        : (
+          chrome.offscreen.closeDocument(),
+          "off.png"
+        )
     })
   );
 }
