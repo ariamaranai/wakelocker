@@ -1,20 +1,19 @@
-{
-  let isLock = 0;
-  chrome.action.onClicked.addListener(() =>
+chrome.action.onClicked.addListener(() =>
+  chrome.runtime.getContexts({}, contexts =>
     chrome.action.setIcon({
-      path: (isLock = !isLock)
+      path: contexts.length < 2
         ? (
           chrome.offscreen.createDocument({
             justification: "",
             reasons: ["BLOBS"],
             url: "offscreen.htm"
-        }),
-        "on.png"
+          }),
+          "on.png"
         )
         : (
           chrome.offscreen.closeDocument(),
           "off.png"
         )
     })
-  );
-}
+  )
+);
