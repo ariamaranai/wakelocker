@@ -1,18 +1,16 @@
 chrome.action.onClicked.addListener(() =>
-  chrome.runtime.getContexts({}, contexts =>
-    chrome.action.setIcon({
-      path: contexts.length < 2
+  chrome.action.getTitle({}, title =>
+    chrome.action.setTitle({
+      title: title
         ? (
-          chrome.offscreen.createDocument({
-            justification: "",
-            reasons: ["BLOBS"],
-            url: "offscreen.htm"
-          }),
-          "on.png"
+          chrome.action.setIcon({ path: "on.png" }),
+          chrome.power.requestKeepAwake("display"),
+          ""
         )
         : (
-          chrome.offscreen.closeDocument(),
-          "off.png"
+          chrome.action.setIcon({ path: "off.png" }),
+          chrome.power.releaseKeepAwake(),
+          "wakelocker"
         )
     })
   )
