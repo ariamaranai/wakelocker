@@ -1,17 +1,20 @@
-chrome.action.onClicked.addListener(() =>
-  chrome.action.getTitle({}, title =>
-    chrome.action.setTitle({
-      title: title
-        ? (
-          chrome.action.setIcon({ path: "on.png" }),
-          chrome.power.requestKeepAwake("display"),
-          ""
-        )
-        : (
-          chrome.action.setIcon({ path: "off.png" }),
-          chrome.power.releaseKeepAwake(),
-          "wakelocker"
-        )
-    })
-  )
-);
+{
+  let { action, power } = chrome;
+  action.onClicked.addListener(() =>
+    action.getTitle({}, title =>
+      action.setTitle({
+        title: title
+          ? (
+            action.setIcon({ path: "on.png" }),
+            power.requestKeepAwake("display"),
+            ""
+          )
+          : (
+            action.setIcon({ path: "off.png" }),
+            power.releaseKeepAwake(),
+            "wakelocker"
+          )
+      })
+    )
+  );
+}
